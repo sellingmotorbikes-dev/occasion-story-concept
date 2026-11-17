@@ -246,6 +246,13 @@
   .dim.h{top:24%;bottom:4%}
   .hero::after{background:linear-gradient(90deg,rgba(5,7,26,.78) 0%,rgba(5,7,26,.35) 45%,rgba(5,7,26,0) 70%),linear-gradient(0deg,rgba(5,7,26,.6),rgba(5,7,26,0) 35%)}
   @media (max-width:900px){.hf .intro{height:60%}.hero::after{background:linear-gradient(0deg,rgba(5,7,26,.97) 34%,rgba(5,7,26,.3) 62%,rgba(5,7,26,.05))}}
+  /* hero: logo bovenaan in de stroom, tekst eronder; overlappen kan niet meer */
+  .hero{display:flex;flex-direction:column;height:auto;min-height:max(560px,min(100svh,900px))}
+  .hero .top{position:relative;padding:22px 0;display:block;flex:none}
+  .hero .top img{display:block}
+  .hero .in{position:relative;margin-top:auto;padding-top:28px}
+  .hero h1{font-size:clamp(30px,min(7.4vw,11.5vh),104px);max-width:min(100%,9.2em);text-wrap:balance}
+  @media (max-width:900px){.hero .top img{height:46px}.hero h1{font-size:clamp(28px,min(10.4vw,7.5vh),64px)}}
 </style>
 </head>
 <body>
@@ -254,13 +261,13 @@
 
 <header class="hero">
   <div class="hf" aria-hidden="true">
-    <video class="intro on" autoplay muted loop playsinline poster="gw/hero_hf.jpg"><source src="gw/hero_hf.mp4" type="video/mp4"></video>
+    <video class="intro on" autoplay muted loop playsinline poster="gw/hero_hf2.jpg"><source src="gw/hero_hf2.mp4" type="video/mp4"></video>
   </div>
-  <div class="top"><img src="img/logo.svg" alt="Selling Motorbikes"></div>
+  <div class="top"><div class="wrap"><img src="img/logo.svg" alt="Selling Motorbikes"></div></div>
   <span class="slot">Slot 1 · film · Higgsfield</span>
   <div class="in"><div class="wrap">
     <div class="eyebrow">Occasion · 2026 · 10.643 km</div>
-    <h1>Honda Gold Wing Bagger</h1>
+    <h1 id="herotitel">Honda Gold Wing Bagger</h1>
     <p class="tag">Zes cilinders, 126 pk en een automatische DCT-versnellingsbak. Op kenteken sinds april 2026.</p>
     <div class="cta">
       <a class="btn primary" href="#einde">Proefrit maken</a>
@@ -439,6 +446,14 @@
 
 <div class="mbar"><b>€ 30.490,-</b><a class="btn primary sm" href="#einde">Proefrit maken</a></div>
 
+
+<script>
+/* Titel in de hero: nooit meer dan twee regels, op elk scherm. Verkleint de letter tot het past. */
+(function(){var h=document.getElementById('herotitel');if(!h)return;
+function fit(){h.style.fontSize='';var cs=getComputedStyle(h),fs=parseFloat(cs.fontSize);
+  while(fs>22&&h.getBoundingClientRect().height>2.2*fs*1.08){fs-=2;h.style.fontSize=fs+'px'}}
+fit();addEventListener('resize',fit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit)})();
+</script>
 <div class="lb" id="lb"><button class="x" aria-label="Sluiten">×</button><button class="pv" aria-label="Vorige">‹</button><img alt=""><button class="nx" aria-label="Volgende">›</button></div>
 
 <script>
